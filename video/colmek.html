@@ -2,26 +2,28 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Live Player</title>
+  <title>HTML5 Video Player</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="sugo.css">
 
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <!-- Panggil CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<script>
-  var video = document.getElementById('video');
-  var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+<div class="container">
+  <h1>🎥 Video Player</h1>
 
-  if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = videoSrc;
-  } else if (Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource(videoSrc);
-    hls.attachMedia(video);
-  }
-</script>
+  <div class="video-box">
+    <video controls playsinline>
+      <source src="video.mp4" type="video/mp4">
+      Browser kamu tidak mendukung video HTML5.
+    </video>
+  </div>
+
+  <div class="note">
+    Tekan play untuk mulai menonton
+  </div>
+</div>
 
 </body>
 </html>
