@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Videy</title>
+<meta charset="UTF-8">
+<title>Safelink Converter</title>
+
 </head>
+
 <body>
-  <h1>Videy</h1>
-  <p>Gunakan URL yang valid.</p>
+
+<div class="safelink-box">
+  <h2>Safelink Generator</h2>
+  <p>Silakan tunggu beberapa detik untuk menuju link tujuan</p>
+
+  <input type="text" id="url" placeholder="Link akan diproses..." readonly>
+  <button id="btn" disabled>Loading...</button>
+  <div id="timer"></div>
+</div>
+
+<script>
+var params = new URLSearchParams(window.location.search);
+var target = params.get("url");
+
+if(target){
+  target = atob(target);
+  document.getElementById("url").value = target;
+
+  var timeleft = 10;
+  var countdown = setInterval(function(){
+    document.getElementById("timer").innerHTML = 
+      "Tunggu " + timeleft + " detik...";
+    timeleft--;
+
+    if(timeleft < 0){
+      clearInterval(countdown);
+      document.getElementById("timer").innerHTML = "Silakan klik tombol di bawah";
+      var btn = document.getElementById("btn");
+      btn.innerHTML = "Kunjungi Link";
+      btn.disabled = false;
+      btn.onclick = function(){
+        window.location.href = target;
+      }
+    }
+  },1000);
+}else{
+  document.querySelector(".safelink-box").innerHTML =
+  "<h3>Link tidak valid</h3>";
+}
+</script>
+
 </body>
 </html>
 
